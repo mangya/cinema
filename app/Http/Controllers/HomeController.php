@@ -38,25 +38,30 @@ class HomeController extends Controller
     {
         $show = Event::where(['status' => 1, 'code' => $request->get('event_code')])->first();
         if($show) {
-			$booking = new Booking;
-			$booking->user_id = auth()->user()->id;
-			$booking->code = $booking->generateCode();
-			$booking->event_id = $show->id;
-            $booking->seats = $request->get('seats');
-			$booking->amount = $show->price * $request->get('seats');
-			$booking->booking_date = date('Y-m-d H:i:s');
-			$booking->status = 1;
-			$booking->save();
+            if($show->seats_available >= $request->get('seats')) {
+                $booking = new Booking;
+                $booking->user_id = auth()->user()->id;
+                $booking->code = $booking->generateCode();
+                $booking->event_id = $show->id;
+                $booking->seats = $request->get('seats');
+                $booking->amount = $show->price * $request->get('seats');
+                $booking->booking_date = date('Y-m-d H:i:s');
+                $booking->status = 1;
+                $booking->save();
 
-            $show->decrement('seats_available', $request->get('seats'));
-            $show->save();
+                $show->decrement('seats_available', $request->get('seats'));
+                $show->save();
 
-            $booking_code = $booking->code;
+                $booking_code = $booking->code;
 
-			return view('booking_confirmation', compact('show','booking_code'));
+                return view('booking_confirmation', compact('show','booking_code'));
+            } else {
+                $message = 'Requested seats are not available';
+                return view('booking_msg', compact('message'));
+            }
         }
-        
-        return view('booking_confirmation', compact('show'));
+        $message = 'Show unavailable';
+        return view('booking_msg', compact('message'));
     }
 
     public function cancelBooking(Request $request)
