@@ -3,21 +3,21 @@ A cinema ticket booking system
 
 The below requirements are implemented
 
-● Users should be able to register and log in.
-● Users should be logged in to complete a booking, but can view and select
+1. Users should be able to register and log in.
+2. Users should be logged in to complete a booking, but can view and select
 whilst unauthenticated.
-● Users should be given a unique booking reference number to use as a
+3. Users should be given a unique booking reference number to use as a
 redemption method.
-● Users should be able to view their booking specifics after having booked.
-● Users should be able to cancel a booking up until one hour before the show
+4. Users should be able to view their booking specifics after having booked.
+5. Users should be able to cancel a booking up until one hour before the show
 starts.
-● Cinema theaters should have a maximum number of 30 seats.
-● When booking, a user need only choose a cinema, a film, a show time, and the
+6. Cinema theaters should have a maximum number of 30 seats.
+7. When booking, a user need only choose a cinema, a film, a show time, and the
 number of tickets
 
 Below are the assumptions considered
 
-● Users won’t need to pay. 
+8. Users won’t need to pay. 
 
 This App is built with Laravel 5.5
 
@@ -45,8 +45,8 @@ sudo chmod -R ug+rwx storage/framework
 sudo chown -R :www-data storage/logs
 sudo chmod -R ug+rwx storage/logs
 ```
-6. Create database tables and sample data with `php artisan migrate:refresh --seed`
-7. Run the application with `php artisan serve` (MySQL service should be up and running).
-8. Access `http://localhost:8000` and you're ready to go!
+7. Create database tables and sample data with `php artisan migrate:refresh --seed`
+8. Run the application with `php artisan serve` (MySQL service should be up and running).
+9. Access `http://localhost:8000` and you're ready to go!
 
 Thank you 😊
